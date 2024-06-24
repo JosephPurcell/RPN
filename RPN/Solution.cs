@@ -9,6 +9,12 @@ namespace RPN
 {
     public class Solution
     {
+        // Leetcode stats
+        // removed tryPop() calls as the hurt the metrics
+        // still in the GitHub initial versions
+        // Runtime 75ms - Beats 61.97% 
+        // Memory 43.76MB - Beats 24.84%
+
         public int EvalRPN(string[] tokens)
         {
             // algorithm
@@ -25,53 +31,29 @@ namespace RPN
                 {
                     case "+":
                         // second operand is always above first operand on the stack
-                        if (!tokenStack.TryPop(out int second))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
-                        if (!tokenStack.TryPop(out int first))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
+                        int second = tokenStack.Pop();
+                        int first = tokenStack.Pop();
                         int result = first + second;
                         tokenStack.Push(result);
                         break;
 
                     case "-":
-                        if (!tokenStack.TryPop(out second))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
-                        if (!tokenStack.TryPop(out first))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
+                        second = tokenStack.Pop();
+                        first = tokenStack.Pop();
                         result = first - second;
                         tokenStack.Push(result);
                         break;
 
                     case "/":
-                        if (!tokenStack.TryPop(out second))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
-                        if (!tokenStack.TryPop(out first))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
+                        second = tokenStack.Pop();
+                        first = tokenStack.Pop();
                         result = first / second ;
                         tokenStack.Push(result);
                         break;
 
                     case "*":
-                        if (!tokenStack.TryPop(out second))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
-                        if (!tokenStack.TryPop(out first))
-                        {
-                            throw new Exception("malformed statement, missing operand for operator at position {i}");
-                        }
+                        second = tokenStack.Pop();
+                        first = tokenStack.Pop();
                         result = first * second;
                         tokenStack.Push(result);
                         break;
